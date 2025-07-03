@@ -1,6 +1,6 @@
 # 🛒 EcoHaven Mart Chatbot
 
-An AI-powered chatbot for EcoHaven Mart — a fictional sustainable store — built with **LangChain**, **OpenAI**, **FAISS**, and **Streamlit**. It provides customers with fast, intelligent answers to any question about the store, its owners, policies, and products.
+An AI-powered chatbot for EcoHaven Mart a fictional sustainable store built with **LangChain**, **OpenAI**, **FAISS**, and **Streamlit**. It provides customers with fast, intelligent answers to any question about the store, its owners, policies, and products.
 
  **Live App:**  
  [Launch EcoHaven Chatbot](https://ecohaven-project-9kxelogxagfx7m4na3eggr.streamlit.app/)
