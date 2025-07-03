@@ -1,11 +1,14 @@
 import streamlit as st
+import json
+import os
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.document_loaders import TextLoader, JSONLoader
+from langchain.schema import Document
+from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import os
+
 
 
 
@@ -13,12 +16,19 @@ openai_api_key = st.secrets["openai_api_key"]
 llm = ChatOpenAI(openai_api_key=openai_api_key, temperature=0.2)
 
 
+
 def load_data():
     docs = []
+
     loader = TextLoader("store_data/about_us.md")
     docs += loader.load()
-    loader = JSONLoader("store_data/products.json", jq_schema=".products", text_content=False)
-    docs += loader.load()
+
+    with open("store_data/products.json", "r") as f:
+        data = json.load(f)
+        for item in data["products"]:
+            content = f"{item['name']}: {item['description']} - Price: {item['price']}"
+            docs.append(Document(page_content=content))
+
     return docs
 
 def build_vectorstore():
