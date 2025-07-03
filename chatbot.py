@@ -1,7 +1,4 @@
-
-from dotenv import load_dotenv
-load_dotenv()
-
+import streamlit as st
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.vectorstores import FAISS
@@ -10,8 +7,11 @@ from langchain.document_loaders import TextLoader, JSONLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
 
-llm = ChatOpenAI(temperature=0.2)
-embeddings = OpenAIEmbeddings()
+
+
+openai_api_key = st.secrets["openai_api_key"]
+llm = ChatOpenAI(openai_api_key=openai_api_key, temperature=0.2)
+
 
 def load_data():
     docs = []
