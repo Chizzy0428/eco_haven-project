@@ -33,7 +33,7 @@ def load_data():
 
 def build_vectorstore():
     docs = load_data()
-    splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=50)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     splits = splitter.split_documents(docs)
     return FAISS.from_documents(splits, embeddings)
 
