@@ -31,10 +31,16 @@ def load_data():
 
     return docs
 
+
 def build_vectorstore():
     docs = load_data()
-    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-    splits = splitter.split_documents(docs)
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    splits = text_splitter.split_documents(docs)
+
+    print(f"Loaded {len(splits)} chunks from docs")
+
+    embeddings = OpenAIEmbeddings(openai_api_key=st.secrets["openai_api_key"])
     return FAISS.from_documents(splits, embeddings)
 
 db = build_vectorstore()
